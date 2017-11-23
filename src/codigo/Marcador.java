@@ -15,15 +15,15 @@ public class Marcador extends GRect{
 		super(width, height);
 		setFilled(true);
 		setFillColor(Color.WHITE);
-		texto.setLabel("");
-		texto.setFont(new Font ("Verdana", Font.BOLD, 18));	
+		texto.setLabel(" " + Arkanoid.puntuacion);
+		texto.setFont(new Font ("Verdana", Font.BOLD, 11));	
 	}
 	
 	
 	public void dibuja(Arkanoid _arkanoid)
 	{
-		_arkanoid.add(this, _arkanoid.getWidth() -50, getY());
-		_arkanoid.add(texto, _arkanoid.getWidth() -50, getY()+30);
+		_arkanoid.add(this, _arkanoid.getWidth() -60, getY());
+		_arkanoid.add(texto, _arkanoid.getWidth() -60, getY()+30);
 	}
 
 

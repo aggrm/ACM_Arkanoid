@@ -22,7 +22,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
     int altoLadrillo = 15;
     int espacioMenu = 80;
 	//Marcador del arkanoid
-    int puntuacion= 0;
+    static int puntuacion= 0;
     Marcador marcador = new Marcador(20, 40);
     
 	public void init(){
