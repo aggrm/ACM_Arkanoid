@@ -8,7 +8,7 @@ import acm.graphics.GLabel;
 import acm.graphics.GRect;
 
 /*
- * Autor: Jorge Cisneros
+ * Autor: Alberto Goujon
  * 
  * El Arkanoid pero orientado a objetos
  */
