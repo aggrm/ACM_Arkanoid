@@ -8,8 +8,10 @@ import acm.graphics.GRect;
 
 public class Marcador extends GRect{
 
+	//Declaración de Sistema de puntuación:
 	GLabel texto = new GLabel("");
 	int puntuacion= 0;
+	
 	public Marcador(double width, double height) 
 	{
 		super(width, height);
@@ -18,7 +20,6 @@ public class Marcador extends GRect{
 		texto.setLabel("0");
 		texto.setFont(new Font ("Verdana", Font.BOLD, 11));	
 	}
-	
 	
 	public void dibuja(Arkanoid _arkanoid)
 	{
@@ -31,6 +32,7 @@ public class Marcador extends GRect{
 		puntuacion += puntos;
 		texto.setLabel("" + puntuacion);
 	}
+	
 	
 
 }

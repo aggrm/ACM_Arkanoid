@@ -53,7 +53,11 @@ public class Pelota extends GOval{
 		}
 		//chequea si ha chocado con el techo
 		if (this.getY()<0){
-			yVelocidad *= -1; 
+			yVelocidad *= -1;
+		//chequea si ha chocado con la pared de abajo
+		if (this.getY() > getWidth()){
+			_arkanoid.marcadorvidas.actualizaMarcador(-1);
+		}
 		}
 		if(chequeaColision(getX(), getY(), _arkanoid)){ 									//chequeo la esquina superior izquierda
 			if(chequeaColision(getX()+getWidth(), getY(), _arkanoid)){ 						//chequeo la esquina superior derecha
@@ -78,12 +82,13 @@ public class Pelota extends GOval{
 		boolean noHaChocado = true;
 		GObject auxiliar;
 		auxiliar = _arkanoid.getElementAt(posX, posY);
-
 		if (auxiliar instanceof Ladrillo){
-			if (auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY){
+			if (auxiliar.getY() >= posY && 
+				auxiliar.getY() + auxiliar.getHeight() <= posY){
 				yVelocidad *= -1;
 			}
-			else if(auxiliar.getX() == posX || auxiliar.getX() + auxiliar.getWidth() == posX){
+			else if(auxiliar.getX() == posX || 
+					auxiliar.getX() + auxiliar.getWidth() == posX){
 				xVelocidad *= -1;
 			}
 			_arkanoid.remove(auxiliar);
@@ -91,11 +96,26 @@ public class Pelota extends GOval{
 			noHaChocado = false;
 		}
 		else if (auxiliar instanceof Barra){
-			yVelocidad *= -1;
+			//vamos a modificar el rebote de la pelota con el cursor
+			//para que no sea igual
+			
+			
+			//calculo la posición x del 
+			double centroBola= getX() + getWidth()/2;
+			if(centroBola > auxiliar.getX() + getWidth()/3 && 
+			   centroBola < auxiliar.getX() + 2 * getWidth()/3)
+			{
+				yVelocidad = -1;
+			}
+			else
+			{
+				yVelocidad = -0.5;
+			}
+			yVelocidad = -1;
 			noHaChocado = false;
 		}
 		return noHaChocado;
-
+		
 	}
 
 

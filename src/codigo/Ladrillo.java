@@ -6,7 +6,7 @@ import acm.graphics.GRect;
 
 /**
  * 
- * @author Jorge Cisneros
+ * @author Alberto Goujon
  *
  * La clase Ladrillo sirve para dibujar los ladrillos
  * del juego
@@ -15,11 +15,11 @@ public class Ladrillo extends GRect{
 
 	/**
 	 * construye un ladrillo
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @param _color
+	 * @param -> x
+	 * @param -> y
+	 * @param -> width
+	 * @param -> height
+	 * @param -> _color
 	 * 
 	 * futuros cambios: que admita número de golpes
 	 */
