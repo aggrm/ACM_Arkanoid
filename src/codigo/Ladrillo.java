@@ -6,7 +6,7 @@ import acm.graphics.GRect;
 
 /**
  * 
- * @author Alberto Goujon
+ * @author Alberto Goujon Gutiérrez
  *
  * La clase Ladrillo sirve para dibujar los ladrillos
  * del juego

@@ -8,23 +8,28 @@ import acm.graphics.GRect;
 
 public class Vidas extends GRect{
 	//Declaración de Sistema de vidas:
-		GLabel axiliarvida = new GLabel("");
-		int vidas= 3;
-		GLabel textovida = new GLabel("");
+	GLabel auxiliarvida = new GLabel("");
+	static int numvidas= 3;
+	GLabel textovida = new GLabel("");
+
 	public Vidas(double width, double height)
 	{
 		super(width, height);
 		setFilled (true);
 		setFillColor(Color.WHITE);
 		textovida.setLabel("3");
-		textovida.setFont(new Font ("Verdana", Font.BOLD, 11));
+		textovida.setFont(new Font ("Times New Roman", Font.BOLD, 11));
 	}
-			
-	public void actualizaMarcador(int vida)
+	public void dibuja(Arkanoid _arkanoid)
 	{
-		vidas += vida;
-		textovida.setLabel("" + vida);
+		_arkanoid.add(this, _arkanoid.getWidth() -115, getY() +60);
+		_arkanoid.add(auxiliarvida, _arkanoid.getWidth() -111, getY()+150);
+	}		
+	public void actualizaMarcadorVidas(int vida)
+	{
+		numvidas += vida;
+		textovida.setLabel("Vidas: " + -vida);
 	}
-	
+
 
 }

@@ -10,7 +10,8 @@ import acm.graphics.GRect;
  *
  *	la clase Barra es la que dibuja el cursor del juego
  */
-public class Barra extends GRect{
+public class Barra extends GRect
+{
 
 	/**
 	 * Crea el cursor del juego
@@ -18,11 +19,12 @@ public class Barra extends GRect{
 	 * @param height -> el alto del cursor
 	 * @param _color -> color del cursor
 	 */
-	public Barra(double width, double height, Color _color) {
+	public Barra(double width, double height, Color _color) 
+	{
 		super(width, height);
 		setFilled(true);
 		setFillColor(_color);
-		
+
 	}
 	/**
 	 * mueveBarra reposiciona la barra en la coordenada
@@ -31,13 +33,15 @@ public class Barra extends GRect{
 	 * propia barra
 	 * @param anchoPantalla porque así no tengo que pasar nada más
 	 */
-	public void mueveBarra(int posX, int anchoPantalla){
-		if (posX + getWidth() < anchoPantalla){
+	public void mueveBarra(int posX, int anchoPantalla)
+	{
+		if (posX + getWidth() < anchoPantalla)
+		{
 			setLocation(posX, getY());
 		}
 	}
-	
-	
+
+
 
 }
 
