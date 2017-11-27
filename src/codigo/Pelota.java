@@ -57,6 +57,7 @@ public class Pelota extends GOval{
 		if (this.getY()<0){
 			yVelocidad *= -1;
 		}
+		//Las siguentes condiciones son creadas para que el juego funcione con vidas
 		if(this.getY() >= _arkanoid.getHeight() && _arkanoid.vidaAbajo.numvidas >=3)
 		{
 				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
@@ -72,6 +73,8 @@ public class Pelota extends GOval{
 				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
 				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
 		}
+		
+		//las siguietes condiciones seran para que la pelota compruebe la pared
 		if(chequeaColision(getX(), getY(), _arkanoid))
 		{ 																					//chequeo la esquina superior izquierda
 			if(chequeaColision(getX()+getWidth(), getY(), _arkanoid))
@@ -91,8 +94,7 @@ public class Pelota extends GOval{
 		//voy a crear un metodo chequeacolision generico
 		//que sirva para comprobar los choques entre la bola y los ladrillos
 		//y la bola y el cursor
-
-
+		
 		move(xVelocidad, yVelocidad);
 	}
 
