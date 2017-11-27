@@ -9,9 +9,10 @@ import acm.graphics.GRect;
 public class Vidas extends GRect{
 	//Declaración de Sistema de vidas:
 	GLabel auxiliarvida = new GLabel("");
-	static int numvidas= 3;
+	int numvidas= 3;
 	GLabel textovida = new GLabel("");
-
+	
+	//este constructor hace lo mismo que el del marcador 
 	public Vidas(double width, double height)
 	{
 		super(width, height);
@@ -23,12 +24,13 @@ public class Vidas extends GRect{
 	public void dibuja(Arkanoid _arkanoid)
 	{
 		_arkanoid.add(this, _arkanoid.getWidth() -115, getY() +60);
-		_arkanoid.add(auxiliarvida, _arkanoid.getWidth() -111, getY()+150);
+		_arkanoid.add(auxiliarvida, _arkanoid.getWidth() -111, getY()+150); 
+		_arkanoid.add(textovida, _arkanoid.getWidth() -115, getY()+25);
 	}		
 	public void actualizaMarcadorVidas(int vida)
 	{
 		numvidas += vida;
-		textovida.setLabel("Vidas: " + -vida);
+		textovida.setLabel("Vidas: " + numvidas);
 	}
 
 

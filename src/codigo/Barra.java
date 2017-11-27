@@ -33,6 +33,7 @@ public class Barra extends GRect
 	 * propia barra
 	 * @param anchoPantalla porque así no tengo que pasar nada más
 	 */
+	
 	public void mueveBarra(int posX, int anchoPantalla)
 	{
 		if (posX + getWidth() < anchoPantalla)

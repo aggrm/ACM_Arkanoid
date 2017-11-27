@@ -1,6 +1,6 @@
 package codigo;
 /*
- * autor Jorge Cisneros
+ * Autor: Alberto Goujon
  * La clase pelota es la que vamos a utilizar para
  * el juego del arkanoid
  * Tiene dos constructores
@@ -46,35 +46,32 @@ public class Pelota extends GOval{
 	 * 
 	 */
 	public void muevete(Arkanoid _arkanoid){
+		
 		//chequea si ha chocado con las paredes izq o derecha
 		if (getX() + getWidth() >= _arkanoid.getWidth() - _arkanoid.espacioMenu
 				|| getX()<0){
 			xVelocidad *= -1; 
 		}
+		
 		//chequea si ha chocado con el techo
 		if (this.getY()<0){
 			yVelocidad *= -1;
 		}
-		if(this.getY() > getHeight())
+		if(this.getY() >= _arkanoid.getHeight() && _arkanoid.vidaAbajo.numvidas >=3)
 		{
-			_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
 		}
-		if(this.getY() >= _arkanoid.getHeight())
+		if(this.getY() >= _arkanoid.getHeight() && _arkanoid.vidaAbajo.numvidas >=2)
 		{
-			if(Vidas.numvidas <=3 && Vidas.numvidas > 2)
-			{
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
 				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
-			}
-			if(Vidas.numvidas < 3 && Vidas.numvidas > 1)
-			{
-				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
-			}
-			if(Vidas.numvidas < 2 && Vidas.numvidas >=1)
-			{
-				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
-			}
 		}
-
+		if(this.getY() >= _arkanoid.getHeight() && _arkanoid.vidaAbajo.numvidas >=1)
+		{
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
+		}
 		if(chequeaColision(getX(), getY(), _arkanoid))
 		{ 																					//chequeo la esquina superior izquierda
 			if(chequeaColision(getX()+getWidth(), getY(), _arkanoid))
@@ -89,6 +86,7 @@ public class Pelota extends GOval{
 				}
 			}
 		}
+		
 
 		//voy a crear un metodo chequeacolision generico
 		//que sirva para comprobar los choques entre la bola y los ladrillos
@@ -102,23 +100,25 @@ public class Pelota extends GOval{
 		boolean noHaChocado = true;
 		GObject auxiliar;
 		auxiliar = _arkanoid.getElementAt(posX, posY);
-		if (auxiliar instanceof Ladrillo){
-			if (auxiliar.getY() == posY ||
-					auxiliar.getY() + auxiliar.getHeight() == posY){
+		
+		if (auxiliar instanceof Ladrillo)
+		{
+			if (auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY)
+			{
 				yVelocidad *= -1;
 			}
-			else if(auxiliar.getX() == posX || 
-					auxiliar.getX() + auxiliar.getWidth() == posX){
+			else if(auxiliar.getX() == posX || auxiliar.getX() + auxiliar.getWidth() == posX)
+			{
 				xVelocidad *= -1;
 			}
 			_arkanoid.remove(auxiliar);
 			_arkanoid.marcador.actualizaMarcador(20);
 			noHaChocado = false;
 		}
-		else if (auxiliar instanceof Barra){
+		else if (auxiliar instanceof Barra)
+		{
 			//vamos a modificar el rebote de la pelota con el cursor
-			//para que no sea igual
-
+			//para que no sea igual 
 
 			//calculo la posición x del 
 			double centroBola= getX() + getWidth()/2;
