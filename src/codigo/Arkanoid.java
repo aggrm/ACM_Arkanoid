@@ -1,7 +1,6 @@
 package codigo;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.MouseEvent;
 
 import acm.graphics.GLabel;
@@ -23,7 +22,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 
 	//Marcador del arkanoid
 	Marcador marcador = new Marcador(100, 40);														//Caja del marcador
-	Vidas vidaAbajo = new Vidas (50,40);															//Caja de las vidas
+	Vidas vidaAbajo = new Vidas (20,40);															//Caja de las vidas
 	GLabel hasPerdido = new GLabel("GAME OVER");													//Texto de has perdido
 	public void init(){
 		addMouseListeners();
@@ -47,12 +46,28 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		{
 			pelota1.muevete(this);																//hace que la pelota se mueva
 			barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);					//truco para seguir a  la pelota
-			pause(5);
+			pause(0);
 			if(marcador.puntuacion >= 1680)
 			{
 				dibujaNivel02(); 
 				pelota1.setLocation( 50, getHeight()*0.60 - pelota1.getHeight());
-				
+				while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)
+				{
+					pelota1.muevete(this);																//hace que la pelota se mueva
+					barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);					//truco para seguir a  la pelota
+					pause(0);
+					if(marcador.puntuacion >= 3780)
+					{
+						dibujaNivel03();
+						pelota1.setLocation( 50, getHeight()*0.60 - pelota1.getHeight());
+						while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)
+						{
+							pelota1.muevete(this);																//hace que la pelota se mueva
+							barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);					//truco para seguir a  la pelota
+							pause(0);
+						}
+					}
+				}				
 			}
 			if(vidaAbajo.numvidas <= 0)
 			{
@@ -62,7 +77,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		}
 	}
 
-	public void mouseMoved (MouseEvent evento)
+	public void mouseMoved (MouseEvent evento)													//condición que la barra hace para qu no se pase del espacio del menú
 	{
 		barra1.mueveBarra(evento.getX(), getWidth()- espacioMenu);
 	}
@@ -104,6 +119,26 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 			}
 		}
 	}	
+
+	private void dibujaNivel03()																//nivel pirámide																		
+	{
+		int numLadrillos = 14; 	
+		for (int j=0; j < numLadrillos; j++)
+		{
+			for(int i=j; i < numLadrillos; i++)
+			{
+				Ladrillo miLadrillo =
+						new Ladrillo((anchoLadrillo* i - anchoLadrillo*j + ((getWidth() -180) - anchoLadrillo * numLadrillos)/2),
+								altoLadrillo*j,
+								anchoLadrillo, 
+								altoLadrillo, 
+								Color.BLUE);
+
+				add(miLadrillo);
+				pause(7);
+			}
+		}
+	}
 }
 
 
