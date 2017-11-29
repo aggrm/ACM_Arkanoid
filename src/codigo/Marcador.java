@@ -2,7 +2,6 @@ package codigo;
 
 import java.awt.Color;
 import java.awt.Font;
-
 import acm.graphics.GLabel;
 import acm.graphics.GRect;
 
@@ -12,7 +11,7 @@ public class Marcador extends GRect{
 	GLabel texto = new GLabel("");
 	int puntuacion= 0;
 
-	//Este constructor es chachiguay ya que contabilizara la puntuación
+	//Este constructor es chachiguay ya que contabilizara el  puntuación
 	public Marcador(double width, double height) 
 	{
 		super(width, height);

@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import acm.graphics.GLabel;
 import acm.graphics.GRect;
+import acm.util.RandomGenerator;
 
 /*
  * Autor: Alberto Goujon Gutiérrez
@@ -14,15 +15,18 @@ import acm.graphics.GRect;
 
 public class Arkanoid extends acm.program.GraphicsProgram{
 
+	RandomGenerator random = new RandomGenerator();
 	Pelota pelota1 = new Pelota(7, Color.GREEN);													//Pelota 1
 	Barra barra1 = new Barra(70, 7, Color.RED);														//Barra
 	int anchoLadrillo = 25;																			//Ancho del ladrillo
 	int altoLadrillo = 15;																			//Alto del ladrillo
 	int espacioMenu = 130;																			//Barra del menú
 
-	//Marcador del arkanoid
+	//Menu del arkanoid
 	Marcador marcador = new Marcador(100, 40);														//Caja del marcador
-	Vidas vidaAbajo = new Vidas (20,40);															//Caja de las vidas
+	Vidas vidaAbajo = new Vidas (50,40);															//Caja de las vidas
+	Niveles levelUp = new Niveles (50, 40);
+	//Fianles del juego
 	GLabel hasPerdido = new GLabel("GAME OVER");													//Texto de has perdido
 	GLabel hasGanado = new GLabel("YOU WIN!");
 
@@ -34,6 +38,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		add(lateral, getWidth()- espacioMenu - lateral.getWidth()- pelota1.getWidth(), 0);			//lo añade a la pantalla la línea del menú
 		add(pelota1, 50, getHeight()*0.60 - pelota1.getHeight());									//añade a la pelota en la pantalla
 		add(barra1, 0 , getHeight()*0.80);															//añade la barra del juego
+		setBackground(Color.GRAY);
 
 
 
@@ -42,50 +47,12 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 	public void run()
 	{
 		dibujaNivel01();
+		waitForClick();
 		marcador.dibuja(this);																	//añade el marcador en la pantalla
 		vidaAbajo.dibuja(this);																	//añade el las vidas en la pantalla
-		while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)								//hace que funcione en funcion del número de vidas
-		{
-			pelota1.muevete(this);																//hace que la pelota se mueva
-			barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);					//truco para seguir a  la pelota
-			pause(0);
-			//ENLACE ENTRE NIVELE 1 AL 2
-			if(marcador.puntuacion >= 1680)
-			{
-				dibujaNivel02(); 
-				pelota1.setLocation( 50, getHeight()*0.60 - pelota1.getHeight());
-				while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)						//hace que funcione en funcion del número de vidas
-				{
-					pelota1.muevete(this);														//hace que la pelota se mueva
-					barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);			//truco para seguir a  la pelota
-					pause(0);
-					//ENLACE ENTRE EL NIVEL 2 AL 3
-					if(marcador.puntuacion >= 3780)
-					{
-						dibujaNivel03();
-						pelota1.setLocation( 50, getHeight()*0.60 - pelota1.getHeight());
-						while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)				//hace que funcione en funcion del número de vidas
-						{
-							pelota1.muevete(this);												//hace que la pelota se mueva
-							barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);	//truco para seguir a  la pelota
-							pause(0);
-							if(marcador.puntuacion >= 5880)
-							{
-								remove(pelota1);
-								add(hasGanado, getWidth()/3.5, getHeight()/2.5);
-							}
-						}
-						
-					}
-				}				
-			}
-			
-			if(vidaAbajo.numvidas <= 0)
-			{
-				add(hasPerdido, getWidth()/3.5, getHeight()/2.5);
-			}
-
-		}
+		levelUp.dibuja(this);
+		actualizaNivel();																		//Actaulizara el nivel
+		
 	}
 
 	public void mouseMoved (MouseEvent evento)													//condición que la barra hace para qu no se pase del espacio del menú
@@ -102,7 +69,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 			{
 				Ladrillo miLadrillo =
 						new Ladrillo(j * anchoLadrillo + 50, i * altoLadrillo + 60, anchoLadrillo, altoLadrillo,
-								Color.BLUE);
+								random.nextColor());
 
 				add(miLadrillo);
 				pause(7);
@@ -119,11 +86,11 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 			for(int i=j; i < numLadrillos; i++)
 			{
 				Ladrillo miLadrillo =
-						new Ladrillo((anchoLadrillo* i - anchoLadrillo*j/2 + ((getWidth()- 100) - anchoLadrillo * numLadrillos)/2),
+						new Ladrillo((anchoLadrillo* i - anchoLadrillo*j/2 + ((getWidth()- 140) - anchoLadrillo * numLadrillos)/2),
 								altoLadrillo*j,
 								anchoLadrillo, 
 								altoLadrillo, 
-								Color.BLUE);
+								random.nextColor());
 
 				add(miLadrillo);
 				pause(7);
@@ -131,7 +98,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		}
 	}	
 
-	private void dibujaNivel03()																//nivel pirámide																		
+	private void dibujaNivel03()																//nivel mitadPirámide																		
 	{
 		int numLadrillos = 14; 	
 		for (int j=0; j < numLadrillos; j++)
@@ -144,11 +111,62 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 								altoLadrillo*j,
 								anchoLadrillo, 
 								altoLadrillo, 
-								Color.BLUE);
+								random.nextColor());
 
 				add(miLadrillo);
 				pause(7);
 			}
+		}
+	}
+
+	private void actualizaNivel()
+	{
+		while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)								//hace que funcione en funcion del número de vidas
+		{
+			pelota1.muevete(this);																//hace que la pelota se mueva
+			barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);					//truco para seguir a  la pelota
+			pause(0);
+			//ENLACE ENTRE NIVELE 1 AL 2
+			if(marcador.puntuacion >= 1680)
+			{
+				dibujaNivel02(); 
+				levelUp.actualizaMarcadorNivel(+1);
+				waitForClick();
+				pelota1.setLocation( 50, getHeight()*0.70 - pelota1.getHeight());
+				while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)						//hace que funcione en funcion del número de vidas
+				{
+					pelota1.muevete(this);														//hace que la pelota se mueva
+					barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);			//truco para seguir a  la pelota
+					pause(0);
+					//ENLACE ENTRE EL NIVEL 2 AL 3
+					if(marcador.puntuacion >= 3780)
+					{
+						dibujaNivel03();
+						levelUp.actualizaMarcadorNivel(-1);
+						waitForClick();
+						pelota1.setLocation( 50, getHeight()*0.70 - pelota1.getHeight());
+						while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)				//hace que funcione en funcion del número de vidas
+						{
+							pelota1.muevete(this);												//hace que la pelota se mueva
+							barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);	//truco para seguir a  la pelota
+							pause(0);
+							if(marcador.puntuacion >= 5880)
+							{
+								pelota1.setLocation( 50, getHeight()*0.70 - pelota1.getHeight());
+								remove(pelota1);
+								add(hasGanado, getWidth()/3.5, getHeight()/2.5);
+							}
+						}
+						
+					}
+				}				
+			}
+			
+			if(vidaAbajo.numvidas <= 0)
+			{
+				add(hasPerdido, getWidth()/3.5, getHeight()/2.5);
+			}
+
 		}
 	}
 }

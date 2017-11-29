@@ -9,6 +9,7 @@ import java.awt.Color;
 
 import acm.graphics.GObject;
 import acm.graphics.GOval;
+import java.awt.event.MouseEvent;
 
 public class Pelota extends GOval{
 
@@ -60,17 +61,17 @@ public class Pelota extends GOval{
 		//Las siguentes condiciones son creadas para que el juego funcione con vidas
 		if(this.getY() >= _arkanoid.getHeight() && _arkanoid.vidaAbajo.numvidas >=3)
 		{
-				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.80 - this.getHeight());
 				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
 		}
 		if(this.getY() >= _arkanoid.getHeight() && _arkanoid.vidaAbajo.numvidas >=2)
 		{
-				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.80 - this.getHeight());
 				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
 		}
 		if(this.getY() >= _arkanoid.getHeight() && _arkanoid.vidaAbajo.numvidas >=1)
 		{
-				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.65 - this.getHeight());
+				setLocation(_arkanoid.getWidth()/2, _arkanoid.getHeight()*0.80 - this.getHeight());
 				_arkanoid.vidaAbajo.actualizaMarcadorVidas(-1);
 		}
 		

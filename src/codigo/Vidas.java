@@ -18,7 +18,7 @@ public class Vidas extends GRect{
 		super(width, height);
 		setFilled (true);
 		setFillColor(Color.WHITE);
-		textovida.setLabel("3");
+		textovida.setLabel("Vidas: 3");
 		textovida.setFont(new Font ("Times New Roman", Font.BOLD, 11));
 	}
 	public void dibuja(Arkanoid _arkanoid)
