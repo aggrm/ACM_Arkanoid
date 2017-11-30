@@ -170,8 +170,11 @@ public class Pelota extends GOval{
 		{
 			_arkanoid.largoBarra +=30; 																		//Cambiamos  el integer de la barra
 			_arkanoid.barra1.setSize(_arkanoid.largoBarra, _arkanoid.barra1,getHeight());					//Cambiamos el tamaño de la barra
-			_arkanoid.remove(auxiliar);																		//Quitamos el bonus ya que se ha chocado 
+			_arkanoid.tamañoPelota +=10;																	//Cambiamos  el integer de la pelota																		//Redimensionamos el tamño de la pelota
+			_arkanoid.remove(((Bonus)auxiliar));																		//Quitamos el bonus ya que se ha chocado 
 			noHaChocado = false;
+			
+			
 		}
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------
 		return noHaChocado;

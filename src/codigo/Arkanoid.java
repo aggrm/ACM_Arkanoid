@@ -22,13 +22,17 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		int anchoLadrillo = 25;																		//Ancho del ladrillo
 		int altoLadrillo = 15;																		//Alto del ladrillo
 		int largoBarra= 50;																			//Largo barra
+		int anchoBarra= 7;
 		int tamañoPelota = 7;
 	//------------------------------------------------------------------------------------------------------------------------
 		
 	//Especificaciones de tamaño de los diferentes objetos--------------------------------------------------------------------									
 		Pelota pelota1 = new Pelota(tamañoPelota, Color.GREEN);										//Pelota 1
-		Barra barra1 = new Barra(largoBarra, 7, Color.RED);											//Barra
-		Bonus bonus1 = new Bonus(25,15,Color.WHITE);
+		Pelota pelota2 = new Pelota(tamañoPelota, Color.GREEN);										//Pelota 2	
+		Barra barra1 = new Barra(largoBarra, anchoBarra, Color.RED);											//Barra
+		Bonus bonus1 = new Bonus(25,15,Color.WHITE);												//Bonus 1
+		Bonus bonus2 = new Bonus(25,15,Color.CYAN);													//Bonus 2
+		Bonus bonus3 = new Bonus(25,15,Color.GRAY);													//Bonus 3
 	//------------------------------------------------------------------------------------------------------------------------
 	
 	//Para las variables random-----------------------------------------------------------------------------------------------
@@ -169,7 +173,6 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 					barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);				//truco para seguir a  la pelota	
 					pause(tiempoProgresivo);					
 				//ENLACE ENTRE EL NIVEL 2 AL 3-----------------------------------------------------------------------------------------
-					
 					if(marcador.puntuacion >= 3780)
 					{
 						dibujaNivel03();
