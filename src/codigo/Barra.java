@@ -41,9 +41,6 @@ public class Barra extends GRect
 			setLocation(posX, getY());
 		}
 	}
-
-
-
 }
 
 
