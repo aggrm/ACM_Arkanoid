@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import acm.graphics.GLabel;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
+import java.applet.*;
 
 
 /*
@@ -18,16 +19,16 @@ import acm.util.RandomGenerator;
 public class Arkanoid extends acm.program.GraphicsProgram{
 
 	//Integers de pelota, barra-----------------------------------------------------------------------------------------------
-		int anchoLadrillo = 25;																	//Ancho del ladrillo
-		int altoLadrillo = 15;																	//Alto del ladrillo
-		int largoBarra= 50;																		//Largo barra
-		int tamañoPelota = 7;																	//Tamaño Pelota
+		int anchoLadrillo = 25;																		//Ancho del ladrillo
+		int altoLadrillo = 15;																		//Alto del ladrillo
+		int largoBarra= 50;																			//Largo barra
+		int tamañoPelota = 7;
 	//------------------------------------------------------------------------------------------------------------------------
 		
 	//Especificaciones de tamaño de los diferentes objetos--------------------------------------------------------------------									
 		Pelota pelota1 = new Pelota(tamañoPelota, Color.GREEN);										//Pelota 1
 		Barra barra1 = new Barra(largoBarra, 7, Color.RED);											//Barra
-		Bonus bonus1 = new Bonus(15,25,Color.WHITE);
+		Bonus bonus1 = new Bonus(25,15,Color.WHITE);
 	//------------------------------------------------------------------------------------------------------------------------
 	
 	//Para las variables random-----------------------------------------------------------------------------------------------
@@ -41,7 +42,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		int espacioMenu = 130;																		//Barra del menú
 	//------------------------------------------------------------------------------------------------------------------------
 	
-	//Fianles del juego-------------------------------------------------------------------------------------------------------
+	//Finales del juego-------------------------------------------------------------------------------------------------------
 		GLabel hasPerdido = new GLabel("GAME OVER");												//Texto de has perdido
 		GLabel hasGanado = new GLabel("YOU WIN!");													//Texto de has ganado
 	//------------------------------------------------------------------------------------------------------------------------
@@ -53,15 +54,14 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		GRect lateral = new GRect(3, getWidth());													//Línea del menú
 		lateral.setFilled(true);																	//Línea del menú
 		add(lateral, getWidth()- espacioMenu - lateral.getWidth()- pelota1.getWidth(), 0);			//Lo añade a la pantalla la línea del menú
-		add(pelota1, 50, getHeight()*0.60 - pelota1.getHeight());									//Añade a la pelota en la pantalla
+		add(pelota1, 50, (int)(getHeight()*0.60 - pelota1.getHeight()));							//Añade a la pelota en la pantalla
 		add(barra1, 0 , getHeight()*0.80);															//Añade la barra del juego
 		setBackground(Color.GRAY);
 	}
 	
 	public void run()
 	{
-		dibujaNivel01();
-		//add(bonus1,random.nextInt(15-25),random.nextInt(15-300));									//BONUSSSSSS!!!
+		dibujaNivel01();								
 		waitForClick();
 		marcador.dibuja(this);																		//Añade el marcador en la pantalla
 		vidaAbajo.dibuja(this);																		//Añade el las vidas en la pantalla
@@ -77,20 +77,28 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 	
 	private void dibujaNivel01()																	//Nivel de líneas de ladrillos
 	{
-		int numLadrillos = 7; 	
-		for (int i=0; i < numLadrillos; i++)
+		int numFilas = 7;
+		int numColumnas = 12;
+		for (int i=0; i < numFilas; i++)
 		{
-			for(int j=0; j < 12; j++)
+			for(int j=0; j < numColumnas; j++)
 			{
 				Ladrillo miLadrillo =
 						new Ladrillo(j * anchoLadrillo + 50, i * altoLadrillo + 60, anchoLadrillo, altoLadrillo,
-								random.nextColor());
-
+								Color.RED);
+				if (random.nextInt(numFilas*numColumnas)==5)
+				{
+					add(bonus1, j * anchoLadrillo + 50, i * altoLadrillo + 60);
+				}
+					if (random.nextInt(numFilas*numColumnas)==5)
+					{
+						add(bonus1, j * anchoLadrillo + 50, i * altoLadrillo + 60);
+					}			
 				add(miLadrillo);
 				pause(7);
 			}
 		}
-
+		add(bonus1);
 	}
 
 	private void dibujaNivel02()																	//Nive2 pirámide																		
@@ -105,7 +113,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 								altoLadrillo*j,
 								anchoLadrillo, 
 								altoLadrillo, 
-								random.nextColor());
+								Color.RED);
 
 				add(miLadrillo);
 				pause(7);
@@ -126,8 +134,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 								altoLadrillo*j,
 								anchoLadrillo, 
 								altoLadrillo, 
-								random.nextColor());
-
+								Color.RED);
 				add(miLadrillo);
 				pause(7);
 			}
@@ -139,8 +146,15 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)									//hace que funcione en funcion del número de vidas
 		{
 			pelota1.muevete(this);																	//hace que la pelota se mueva
-			barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);						//truco para seguir a  la pelota
-			pause(0);
+			//barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);						//truco para seguir a  la pelota
+			float tiempoProgresivo = 5;																//para hacer un rebote progresivo
+			tiempoProgresivo -= 0.000333;															//resta al 5 cada segundo milesimas de velocidad de movimiento	
+			pause(5);
+			
+				if(tiempoProgresivo<=1)
+				{
+					tiempoProgresivo= 1;
+				}
 			//ENLACE ENTRE NIVELE 1 AL 2-------------------------------------------------------------------------------------------
 			
 			if(marcador.puntuacion >= 1680)
@@ -152,9 +166,8 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 				while (vidaAbajo.numvidas >=1 && vidaAbajo.numvidas <= 3)							//hace que funcione en funcion del número de vidas
 				{
 					pelota1.muevete(this);															//hace que la pelota se mueva
-					barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);				//truco para seguir a  la pelota
-					pause(0);
-					
+					barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);				//truco para seguir a  la pelota	
+					pause(tiempoProgresivo);					
 				//ENLACE ENTRE EL NIVEL 2 AL 3-----------------------------------------------------------------------------------------
 					
 					if(marcador.puntuacion >= 3780)
@@ -167,7 +180,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 						{
 							pelota1.muevete(this);													//hace que la pelota se mueva
 							barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);		//truco para seguir a  la pelota
-							pause(0);
+							pause(tiempoProgresivo);
 				//FINAL DEL JUEGO Y AÑADE hasGanado-------------------------------------------------------------------------------------
 							if(marcador.puntuacion >= 5880)
 							{
@@ -176,6 +189,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 								remove(barra1);														//Elimino la barra
 								add(hasGanado, getWidth()/3.5, getHeight()/2.5);					//Añado el YOU WIN!
 							}
+				//-----------------------------------------------------------------------------------------------------------------------
 						}
 						
 					}
@@ -185,7 +199,8 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 			if(vidaAbajo.numvidas <= 0)																//Si el juego tiene 0 vidas termina el juego añadiendo 
 			{
 				remove(barra1);																		//Elimina la barra
-				add(hasPerdido, getWidth()/3.5, getHeight()/2.5);									//Añado GAME OVER
+				remove(barra1);
+				add(hasPerdido, getWidth()/3.5, getHeight()/1.5);									//Añado GAME OVER
 			}
 
 		}

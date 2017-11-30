@@ -114,11 +114,11 @@ public class Pelota extends GOval{
 		//Comprueba por todos los lados del bloque---------------------------------------------------------------------------------------------------------------
 		if (auxiliar instanceof Ladrillo)
 		{
-			if (auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY)
+			if ((int)auxiliar.getY() == (int)posY || (int)auxiliar.getY() + (int)auxiliar.getHeight() == (int)posY)
 			{
 				yVelocidad *= -1;
 			}
-			else if(auxiliar.getX() == posX || auxiliar.getX() + auxiliar.getWidth() == posX)
+			else if((int)auxiliar.getX() == (int)posX || (int)auxiliar.getX() + (int)auxiliar.getWidth() == (int)posX)
 			{
 				xVelocidad *= -1;
 			}
@@ -165,14 +165,14 @@ public class Pelota extends GOval{
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------
 
 		//Sistema de bonus---------------------------------------------------------------------------------------------------------------------------------------
-//		else if(auxiliar instanceof Bonus)
-//			//Especificamos que ocurre cuando tocas el Bonus
-//		{
-//			_arkanoid.largoBarra +=30; 															//Cambiamos  el integer de la barra
-//			_arkanoid.barra1.setSize(_arkanoid.barra1, _arkanoid.barra1.getHeight());			//Cambiamos el tamaño de la barra
-//			_arkanoid.remove(auxiliar);															//Quitamos el bonus ya que se ha chocado 
-//			noHaChocado = false;
-//		}
+		else if(auxiliar instanceof Bonus)
+		//Especificamos que ocurre cuando tocas el Bonus
+		{
+			_arkanoid.largoBarra +=30; 																		//Cambiamos  el integer de la barra
+			_arkanoid.barra1.setSize(_arkanoid.largoBarra, _arkanoid.barra1,getHeight());					//Cambiamos el tamaño de la barra
+			_arkanoid.remove(auxiliar);																		//Quitamos el bonus ya que se ha chocado 
+			noHaChocado = false;
+		}
 		//-------------------------------------------------------------------------------------------------------------------------------------------------------
 		return noHaChocado;
 
