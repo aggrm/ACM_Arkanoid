@@ -31,7 +31,7 @@ public class Vidas extends GRect{
 		_arkanoid.add(this, _arkanoid.getWidth() -115, getY() +60);
 		_arkanoid.add(auxiliarvida, _arkanoid.getWidth() -111, getY()+150); 
 		_arkanoid.add(textovida, _arkanoid.getWidth() -110, getY()+25);
-		_arkanoid.add(_arkanoid.Heart, _arkanoid.getWidth() -110, getY()+25);
+		//_arkanoid.add(_arkanoid.Heart, _arkanoid.getWidth() -110, getY()+25);
 	}
 	//----------------------------------------------------------------------------------------------------------------------------
 	

@@ -8,6 +8,7 @@ import acm.graphics.GLabel;
 import acm.graphics.GObject;
 import acm.graphics.GRect;
 import acm.util.RandomGenerator;
+import acmx.export.javax.swing.JButton;
 
 
 /*
@@ -32,7 +33,8 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		Pelota pelota1 = new Pelota(tamañoPelota, Color.GREEN);										//Pelota	
 		Barra barra1 = new Barra(largoBarra, anchoBarra, Color.BLACK);								//Barra
 		Bonus bonus1 = new Bonus(25,15,Color.WHITE);
-		GObject Heart = new GImage("ACM_Arkanoid/img/Heart.png", 21, 21);										//Imagen corazón
+		//GObject Heart = new GImage("ACM_Arkanoid/img/Heart.png", 21, 21);							//Imagen corazón
+		//JButton salir = new JButton("EXIT!");														//Salir
 	//------------------------------------------------------------------------------------------------------------------------
 	
 	//Para las variables random-----------------------------------------------------------------------------------------------
@@ -44,11 +46,13 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		Vidas vidaAbajo = new Vidas (50,40);														//Caja de las vidas
 		Niveles levelUp = new Niveles (50, 40);
 		int espacioMenu = 130;																		//Barra del menú
+		
 	//------------------------------------------------------------------------------------------------------------------------
 	
 	//Finales del juego-------------------------------------------------------------------------------------------------------
 		GLabel hasPerdido = new GLabel("GAME OVER");												//Texto de has perdido
 		GLabel hasGanado = new GLabel("YOU WIN!");													//Texto de has ganado
+		
 	//------------------------------------------------------------------------------------------------------------------------
 		
 	public void init(){
@@ -60,7 +64,6 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		add(lateral, getWidth()- espacioMenu - lateral.getWidth()- pelota1.getWidth(), 0);			//Lo añade a la pantalla la línea del menú
 		add(pelota1, 50, (int)(getHeight()*0.60 - pelota1.getHeight()));							//Añade a la pelota en la pantalla
 		add(barra1, 0 , getHeight()*0.80);															//Añade la barra del juego
-		
 		setBackground(Color.GRAY);
 	}
 	
@@ -71,8 +74,8 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		dibujaNivel012();																			//Fila de ladrillos más abajo
 		waitForClick();																				//Click para empezar el juego
 		marcador.dibuja(this);																		//Añade el marcador en la pantalla
-		vidaAbajo.dibuja(this);																		//Añade el las vidas en la pantalla
-		levelUp.dibuja(this);
+		vidaAbajo.dibuja(this);																		//Añade las vidas en la pantalla
+		levelUp.dibuja(this);																		//Añade el número del nivel en pantalla
 		actualizaNivel();																			//Actaulizara el nivel
 		
 	}
@@ -290,6 +293,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 			//-----------------------------------------------------------------------------------------------------------------------------
 		}
 	}
+
 }
 
 

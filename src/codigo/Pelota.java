@@ -113,7 +113,7 @@ public class Pelota extends GOval{
 		//Comprueba por todos los lados del bloque---------------------------------------------------------------------------------------------------------------
 		if (auxiliar instanceof Ladrillo)
 		{
-			if(auxiliar.getY() == posY || auxiliar.getY() + auxiliar.getHeight() == posY)						//Entre las y comprueba el choque con el ladrillo
+			if(auxiliar.getY() <= posY && auxiliar.getY() + auxiliar.getHeight() >= posY)						//Entre las y comprueba el choque con el ladrillo
 			{
 				yVelocidad *= -1;
 			}
