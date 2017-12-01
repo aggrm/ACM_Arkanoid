@@ -33,8 +33,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		Pelota pelota1 = new Pelota(tamañoPelota, Color.GREEN);										//Pelota	
 		Barra barra1 = new Barra(largoBarra, anchoBarra, Color.BLACK);								//Barra
 		Bonus bonus1 = new Bonus(25,15,Color.WHITE);
-		//GObject Heart = new GImage("ACM_Arkanoid/img/Heart.png", 21, 21);							//Imagen corazón
-		//JButton salir = new JButton("EXIT!");														//Salir
+		GObject heart = new GImage("img/Heart.png", 5, 5);											//Imagen corazón
 	//------------------------------------------------------------------------------------------------------------------------
 	
 	//Para las variables random-----------------------------------------------------------------------------------------------
@@ -44,15 +43,13 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 	//Menu del arkanoid-------------------------------------------------------------------------------------------------------
 		Marcador marcador = new Marcador(100, 40);													//Caja del marcador
 		Vidas vidaAbajo = new Vidas (50,40);														//Caja de las vidas
-		Niveles levelUp = new Niveles (50, 40);
-		int espacioMenu = 130;																		//Barra del menú
-		
+		Niveles levelUp = new Niveles (50, 40);														//Caja del numero de nivel
+		int espacioMenu = 130;																		//Barra del menú															//Caja de la salidza
 	//------------------------------------------------------------------------------------------------------------------------
 	
 	//Finales del juego-------------------------------------------------------------------------------------------------------
 		GLabel hasPerdido = new GLabel("GAME OVER");												//Texto de has perdido
-		GLabel hasGanado = new GLabel("YOU WIN!");													//Texto de has ganado
-		
+		GLabel hasGanado = new GLabel("YOU WIN!");													//Texto de has ganado		
 	//------------------------------------------------------------------------------------------------------------------------
 		
 	public void init(){
@@ -65,6 +62,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 		add(pelota1, 50, (int)(getHeight()*0.60 - pelota1.getHeight()));							//Añade a la pelota en la pantalla
 		add(barra1, 0 , getHeight()*0.80);															//Añade la barra del juego
 		setBackground(Color.GRAY);
+		
 	}
 	
 	public void run()
@@ -84,6 +82,13 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 	{
 		barra1.mueveBarra(evento.getX(), getWidth()- espacioMenu);
 	}
+	public void mouseClicked(MouseEvent evento)
+	{
+		if(getElementAt(evento.getX(), evento.getY() )== marcador.cuadroExit)
+				{
+					exit();
+				}
+	}
 	
 	private void dibujaNivel01()																	//Nivel de líneas de ladrillos
 	{
@@ -99,6 +104,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 				add(miLadrillo);
 				pause(7);
 			}
+			
 		}
 	}
 	
@@ -145,13 +151,15 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 								Color.CYAN);
 				if (random.nextInt(numLadrillos)==5)
 				{
-					add(bonus1, anchoLadrillo* i-3 - anchoLadrillo*j/2,altoLadrillo*j);
+					add(bonus1, (anchoLadrillo* i - anchoLadrillo*j/2 + ((getWidth()- 140) - anchoLadrillo * numLadrillos)/2),
+							altoLadrillo*j);
 				}
 
 				add(miLadrillo);
 				pause(7);
 			}
 		}
+		add(bonus1);
 	}	
 	
 	private void dibujaNivel021()																	//Segundo nivel de ladrillo = 14 
@@ -198,12 +206,14 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 								Color.CYAN);
 				if (random.nextInt(numLadrillos)==5)
 				{
-					add(bonus1, anchoLadrillo* i - anchoLadrillo*j,altoLadrillo*j);
+					add(bonus1, anchoLadrillo* i - anchoLadrillo*j+2,altoLadrillo*j);
 				}
 				add(miLadrillo);
 				pause(7);
 			}
+			
 		}
+		add(bonus1);
 	}
 	
 	private void dibujaNivel031()																	//Segundo nivel de ladrillo = 13 
@@ -238,7 +248,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 			
 			if(marcador.puntuacion >= 2160)
 			{
-				setBackground(Color.MAGENTA);
+				setBackground(Color.WHITE);
 				dibujaNivel02();
 				dibujaNivel021();
 				dibujaNivel022();
