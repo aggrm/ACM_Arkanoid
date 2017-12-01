@@ -11,7 +11,7 @@ public class Bonus extends GRect
 	/**
 	 * 
 	 * @param width -> Ancho del bono
-	 * @param height -> Largodel bono
+	 * @param height -> Largo del bono
 	 * @param _color -> Color del bono
 	 */
 	public Bonus(double width, double height, Color _color) 
