@@ -24,7 +24,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 	//Integers de pelota, barra-----------------------------------------------------------------------------------------------
 		int anchoLadrillo = 25;																		//Ancho del ladrillo
 		int altoLadrillo = 15;																		//Alto del ladrillo
-		int largoBarra= 70;																			//Largo barra
+		int largoBarra= 40;																			//Largo barra
 		int anchoBarra= 7;
 		int tamañoPelota = 7;
 	//------------------------------------------------------------------------------------------------------------------------
@@ -96,10 +96,6 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 				Ladrillo miLadrillo =
 						new Ladrillo(j * anchoLadrillo + 50, i * altoLadrillo + 60, anchoLadrillo, altoLadrillo,
 								Color.CYAN);
-				if (random.nextInt(numFilas*numColumnas)==5)
-				{
-					add(bonus1, j * anchoLadrillo + 50, i * altoLadrillo + 60);
-				}
 				add(miLadrillo);
 				pause(7);
 			}
@@ -232,7 +228,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 			barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);						//truco para seguir a  la pelota
 			float tiempoProgresivo = 5;																//para hacer un rebote progresivo
 			tiempoProgresivo -= 0.000333;															//resta al 5 cada segundo milesimas de velocidad de movimiento	
-			pause(tiempoProgresivo);
+			pause(0);
 			
 				if(tiempoProgresivo<=1)
 				{
@@ -253,7 +249,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 				{
 					pelota1.muevete(this);															//hace que la pelota se mueva
 					barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);				//truco para seguir a  la pelota
-					pause(tiempoProgresivo);					
+					pause(0);					
 				//ENLACE ENTRE EL NIVEL 2 AL 3-----------------------------------------------------------------------------------------
 					if(marcador.puntuacion >= 4800)
 					{
@@ -267,7 +263,7 @@ public class Arkanoid extends acm.program.GraphicsProgram{
 						{
 							pelota1.muevete(this);													//hace que la pelota se mueva
 							barra1.mueveBarra((int)pelota1.getX(), getWidth()- espacioMenu);		//truco para seguir a  la pelota
-							pause(tiempoProgresivo);
+							pause(0);
 				//FINAL DEL JUEGO Y AÑADE hasGanado-------------------------------------------------------------------------------------
 							if(marcador.puntuacion >= 7160)
 							{

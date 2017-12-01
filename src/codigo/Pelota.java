@@ -157,7 +157,7 @@ public class Pelota extends GOval{
 		else if(auxiliar instanceof Bonus)
 		//Especificamos que ocurre cuando tocas el Bonus
 		{
-			_arkanoid.anchoBarra +=80; 																		//Cambiamos  el integer de la barra
+			_arkanoid.anchoBarra +=50; 																		//Cambiamos  el integer de la barra
 			_arkanoid.barra1.setSize(_arkanoid.anchoBarra, _arkanoid.barra1.getHeight());					//Redimensionamos el tamaño de la barra
 			_arkanoid.remove(((Bonus)auxiliar));															//Quitamos el bonus ya que se ha chocado 
 			noHaChocado = false;		
